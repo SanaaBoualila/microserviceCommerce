@@ -1,4 +1,4 @@
-INSERT INTO product VALUES(1, 'Ordinateur portable' , 350, 200);
+INSERT INTO product VALUES(1, 'Ordinateur ' , 350, 200);
 
 
 

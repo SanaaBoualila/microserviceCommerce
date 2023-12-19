@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.json.simple.JSONObject;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -69,6 +70,19 @@ public class ProductController {
         productDao.deleteById(id);
     }
 
+    @GetMapping(value="/AdminProduits")
+    public String calculerMargeProduit() {
+        List<Product> products = productDao.findAll();
+        JSONObject resultatJson = new JSONObject();
+
+        for (Product prod : products) {
+            int result = prod.getPrix() - prod.getPrixAchat();
+            String key = "Product{id=" + prod.getId() + ", nom='" + prod.getNom() + "', prix=" + prod.getPrix() + "}";
+            resultatJson.put(key, result);
+        }
+
+        return resultatJson.toJSONString();
+    }
 
 
 
