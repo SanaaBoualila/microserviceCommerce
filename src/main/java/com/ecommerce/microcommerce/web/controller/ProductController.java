@@ -40,7 +40,7 @@ public class ProductController {
         return produit;
     }
 
-    @GetMapping(value = "/test/Produits/{prixLimit}")
+    @GetMapping(value = "/Produits/Test/{prixLimit}")
     public List<Product> testRequete(@PathVariable int prixLimit){
         return productDao.findByPrixGreaterThan(prixLimit);
     }
@@ -70,7 +70,7 @@ public class ProductController {
         productDao.deleteById(id);
     }
 
-    @GetMapping(value="/AdminProduits")
+    @GetMapping(value="/Produits/Marge")
     public String calculerMargeProduit() {
         List<Product> products = productDao.findAll();
         JSONObject resultatJson = new JSONObject();
@@ -83,6 +83,12 @@ public class ProductController {
 
         return resultatJson.toJSONString();
     }
+
+    @GetMapping(value="/Produits/Trier")
+    public List<Product> trierProduitsParOrdreAlphabetique(){
+        return productDao.findAllByOrderByNom();
+    }
+
 
 
 
